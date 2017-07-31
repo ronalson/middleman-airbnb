@@ -3,13 +3,50 @@ title: Le Wagon - Middleman
 ---
 
 <div id="home">
+
+  <div class="banner" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url('https://kitt.lewagon.com/placeholder/cities/berlin');">
+    <div class="banner-content">
+      <h1>Welcome home</h1>
+      <p>Book unique homes and experience a city like a local.</p>
+      <form action="#" class="form-inline">
+       <input type="text" class="form-control input-lg" placeholder="Where?">
+       <input type="text" class="form-control input-lg" placeholder="When?">
+       <select name="" id="" class="form-control input-lg">
+         <option value="1">1 guest</option>
+         <option value="2">2 guests</option>
+         <option value="3">3 guests</option>
+       </select>
+       <input type="submit" class="btn btn-primary btn-lg" value="Search">
+     </form>
+    </div>
+  </div>
+
   <div class="home-content">
-    <%= image_tag "logo.png", width: "200" %>
-    <p>
-      Middleman is now running!
-    </p>
-    <p class="about">
-      <%= link_to "More about this template", "about.html" %>
-    </p>
+
+    <h3 class="text-center">Recent Flats</h3>
+
+    <div class="container">
+      <div class="row">
+        <% data.flats.each do |owner, flat| %>
+        <div class="col-xs-12 col-sm-4">
+          <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('https://kitt.lewagon.com/placeholder/cities/<%= flat.city_slug %>');">
+            <div class="card-category"><%= flat.city_name %></div>
+            <div class="card-description">
+              <h2><%= flat.name %></h2>
+              <p><%= flat.description %></p>
+              <p class="rating">
+                <% 5.times do |i| %>
+                <i class="fa fa-star" style="color: <%= flat.rating > i ? "#ffb400" : "#cacccd" %>"></i>
+                <% end %>
+              </p>
+            </div>
+            <%= image_tag "https://kitt.lewagon.com/placeholder/users/#{owner}", class:"card-user" %>
+            <%= link_to "", "flats/#{owner}.html", class: "card-link" %>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </div>
+
   </div>
 </div>
